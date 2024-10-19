@@ -30,7 +30,10 @@ extract = PythonOperator(
     task_id='extract_reddit_data',
     python_callable=reddit_pipeline,
     op_kwargs={
-        'file_postfix': f'refile_postfix
+        'file_name': f'reddit_{file_postfix}',
+        'subreddit':'dataengineering'
+        'time_filter': day,
+         'limit': 200
     },
     provide_context=True,
     dag=dag
