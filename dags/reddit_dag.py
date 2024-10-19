@@ -18,9 +18,9 @@ file_postfix = datetime.now().strftime("%Y%m%d")
 dag = DAG(
     dag_id='etl_reddit_pipeline',
     default_args=default_args,
-    schedule_interval='daily',
+    schedule_interval='@daily',
     catchup=False,
-    max_active_runs=1
+    max_active_runs=1,
     tags=['reddit', 'etl','pipeline']
 )
 
@@ -34,9 +34,9 @@ extract = PythonOperator(
     python_callable=reddit_pipeline,
     op_kwargs={
         'file_name': f'reddit_{file_postfix}',
-        'subreddit':'dataengineering'
-        'time_filter': day,
-         'limit': 200
+        'subreddit':'dataengineering',
+        'time_filter': 'day',
+        'limit': 200
     },
     provide_context=True,
     dag=dag
