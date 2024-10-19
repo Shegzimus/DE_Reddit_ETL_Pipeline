@@ -2,8 +2,11 @@ from airflow import DAG
 from datetime import datetime
 import os
 import sys
+from airflow.operators.python import PythonOperator
 
-sys.path.insert(index:0, os.path.dirname(os.path.dirname(ox.path.abspath(__file__))))
+sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+
+from pipelines.reddit_pipeline import reddit_pipeline
 
 default_args ={
     'owner': 'Oluwasegun',
